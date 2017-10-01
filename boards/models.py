@@ -19,4 +19,9 @@ class Topic(models.Model):
 class Post(models.Model):
     message = models.TextField(max_length=4000)
     topic = models.ForeignKey(Topic, related_name='posts')
-    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(null=True)
+    created_by = models.ForeignKey(User, related_name='posts')
+    updated_by = models.ForeignKey(User, null=True, related_name='+')
+    # In the Post model, the updated_by field sets the related_name='+'.
+    # This instructs Django that we don’t need this reverse relationship, so it will ignore it.
