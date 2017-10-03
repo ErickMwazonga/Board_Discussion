@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.urls import resolve
 from django.test import TestCase
 
-from .views import home, board_topics
+from .views import home, board_topics, new_topic
 from .models import Board
 
 # Create your tests here.
@@ -65,7 +65,7 @@ class NewTopicTests(TestCase):
         response = self.client.get(url)
         self.assertEquals(response.status_code, 404)
 
-    def test_new_topic_url_resolves_new_topic(self):
+    def test_new_topic_url_resolves_new_topic_view(self):
         view = resolve('/boards/1/new/')
         self.assertEquals(view.func, new_topic)
 
